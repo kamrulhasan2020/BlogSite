@@ -1,0 +1,10 @@
+{% extends "blog/base.html" %}
+{% block title %}Sign Up{% endblock %}
+
+
+{% block content %}
+    <div class='container'>
+        <p> You are logged out.</p>
+        <a href = "{% url 'blog:login' %}">Login</a>
+    </div> 
+{% endblock %}

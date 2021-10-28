@@ -1,0 +1,24 @@
+{% extends "blog/base.html" %}
+{% block title %}My Blog{% endblock %}
+
+
+{% block content %}
+    <div class="container">
+        {% for post in posts %}
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">{{post.title}}</h4>
+                    <p class='text-muted'>
+                    Published at {{post.published}} by {{post.author}}
+                    </p>
+                    <p class="card-text">{{ post.body|truncatewords:30|linebreaks }}</p>
+                    <a href="{{post.get_absolute_url}}">
+                    <button type="button" class="btn btn-secondary">Read More</button>
+                    </a>
+                </div>
+                
+            </div>
+            
+    {% endfor %}
+    </div>
+{% endblock %}

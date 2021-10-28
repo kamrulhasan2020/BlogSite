@@ -1,0 +1,35 @@
+{% extends "blog/base.html" %}
+{% block title %}{{post.title}}{% endblock %}
+
+{% block content %}
+    <div class='container'>
+        <h1>{{ post.title }}</h1>
+        <p class="text-muted">
+Published at {{ post.published }} by {{ post.author }}
+</p>
+        {{ post.body|linebreaks }}
+    </div>
+    <div class='container'>
+        <form action="{% url 'blog:create_comment' post.slug %}" method="post">
+        {% csrf_token %}
+            <label for="comment">Comments:</label>
+            <textarea class="form-control" rows="2" id="comment" name="text"></textarea>
+            <button type="submit" class="btn btn-secondary">Submit</button>
+        </form>
+    </div>
+    <div class='container'>
+        {% for comment in comments %}
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">{{comment.user}}</h4>
+                    <p class='text-muted'>
+                    Commented at {{comment.created}}
+                    </p>
+                    <p class="card-text">{{comment.body}}</p>
+                </div>
+                
+            </div>
+            
+    {% endfor %}
+    </div>
+{% endblock %}
