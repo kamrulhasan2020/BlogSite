@@ -5,6 +5,7 @@ from .import views
 app_name = 'blog'
 
 urlpatterns = [
+    path('', views.HomeView.as_view(), name='home'),
     path('post-list/<str:title>/', views.PostListView.as_view(),
          name='post_list'),
     path('post-detail/<slug:slug>/',

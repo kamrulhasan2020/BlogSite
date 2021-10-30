@@ -1,4 +1,5 @@
 from django.views import View
+from django.views.generic.base import TemplateView
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView
@@ -9,6 +10,10 @@ from django.http import HttpResponseRedirect
 from django.urls import reverse, reverse_lazy
 from .models import Topic, Post, Comment
 from .forms import SignUpForm
+
+
+class HomeView(TemplateView):
+    template_name = 'blog/home.html'
 
 
 class SignUpView(CreateView):
@@ -79,7 +84,7 @@ class PostDeletionView(UserPassesTestMixin, DeleteView):
     slug_field = 'slug'
 
     def get_success_url(self):
-        return reverse('main:home')
+        return reverse('blog:home')
 
     def test_func(self):
         post = get_object_or_404(self.model, slug=self.kwargs['slug'])
